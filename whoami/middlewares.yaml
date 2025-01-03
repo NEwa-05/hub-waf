@@ -6,8 +6,15 @@ metadata:
 spec:
   plugin:
     coraza:
-      crsEnabled: true
+      crsEnabled: false
+      GeoDBOperatorEnabled: true
+      # GeoDBPath: "/geodb/GeoLite2-City.mmdb"
+      # GeoLookupType: city
+      GeoDBPath: "/geodb/GeoLite2-Country.mmdb"
+      GeoLookupType: country
       directives:
-        #- SecGeoLookupDb /tmp/GeoLite2-Country.mmdb
-        - SecRule REMOTE_ADDR "@geoLookup" "chain,id:22,drop,msg:'Non-JP IP address'"
-        - SecRule GEO:COUNTRY_CODE "!@streq JP"
+        - SecRule REMOTE_ADDR "@geoLookup" "id:1,phase:1,pass,log"
+        # - SecRule GEO:CITY "!@streq L'Haÿ-les-Roses" "id:2,phase:1,deny,status:403,log,msg:'Access outside of l Hay is forbidden'"
+        # - SecRule GEO:CITY "!@streq London" "id:2,phase:1,deny,status:403,log,msg:'Access outside of London is forbidden'"
+        - SecRule GEO:COUNTRY_CODE "!@streq FR" "id:2,phase:1,deny,status:403,log,msg:'Access outside of France is forbidden'"
+        - SecRule GEO:COUNTRY_CODE "!@streq GB" "id:2,phase:1,deny,status:403,log,msg:'Access outside of Great Britain is forbidden'"

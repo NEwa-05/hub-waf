@@ -1,8 +1,7 @@
 
 image:
-  #registry: ghcr.io
   repository: newa/teub
-  tag: "dev"
+  tag: "devgeo"
 deployment:
   replicas: 1
 ingressRoute:
@@ -60,11 +59,10 @@ additionalArguments:
   - '--certificatesresolvers.le.distributedAcme.tlschallenge=true'
 hub:
   token: hub-license
-  platformUrl: https://api-preview.hub.traefik.io/agent
   apimanagement:
     enabled: false
-volumes: 
-  - name: geodb
-    mountPath: "/tmp"
-    persistentVolumeClaim:
-      claimName: geodb
+persistence:
+  enabled: true
+  name: geodb
+  path: "/geodb"
+  existingClaim: geodb

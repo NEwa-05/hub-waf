@@ -22,7 +22,7 @@ spec:
       containers:
       - name: downloader
         image: alpine/curl
-        args: ["-OL", "--output-dir", "/tmp/", "https://git.io/GeoLite2-Country.mmdb"]
+        args: ["-OL", "--output-dir", "/tmp/", "https://git.io/{GeoLite2-Country.mmdb,GeoLite2-City.mmdb}"]
         volumeMounts:
           - mountPath: /tmp
             name: geodb

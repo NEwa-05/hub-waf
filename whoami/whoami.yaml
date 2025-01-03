@@ -25,7 +25,6 @@ spec:
             cpu: "50m"  
         image: traefik/whoami
         imagePullPolicy: Always
-
 ---
 apiVersion: v1
 kind: Service
